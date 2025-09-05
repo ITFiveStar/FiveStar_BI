@@ -1,8 +1,10 @@
 version: 1.0
 runtime: python3
+
 build:
   commands:
-    - pip install --no-cache-dir -r backend/requirements.txt
+    build:
+      - pip install --no-cache-dir -r backend/requirements.txt
 
 run:
   command: gunicorn -w 4 -k gthread --threads 8 --timeout 120 -b 0.0.0.0:8080 backend.app:app
@@ -10,6 +12,7 @@ run:
     port: 8080
   env:
     variables:
-      ALLOWED_ORIGINS: "*"                # allow all origins (later restrict to your Vercel domain)
+      ALLOWED_ORIGINS: "*"   # tighten later to your Vercel domain
     secrets:
-      DATABASE_URL: fsbi/mannual-db-url   # this matches the secret name you created in Secrets Manager
+      - name: DATABASE_URL
+        value: fsbi/mannual-db-url   # your Secrets Manager secret name
