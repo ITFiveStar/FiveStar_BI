@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@nivo/bar": "^0.88.0",
+    "@nivo/calendar": "^0.88.0",
+    "@nivo/colors": "^0.88.0",
+    "@nivo/core": "^0.88.0",
+    "@nivo/legends": "^0.88.0",
+    "@nivo/line": "^0.88.0",
+    "@nivo/pie": "^0.88.0",
+    "@nivo/tooltip": "^0.88.0",
+    "@types/papaparse": "^5.3.15",
+    "papaparse": "^5.5.2",
+    "react-dropzone": "^14.3.8"
+  }
+}

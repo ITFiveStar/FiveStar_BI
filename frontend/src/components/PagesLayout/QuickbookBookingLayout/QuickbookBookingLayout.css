@@ -1,0 +1,247 @@
+/* QuickbookBookingLayout.css */
+
+.qbbooking-workflow-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff !important; /* Override any gradient */
+  }
+  
+  /* Main content container */
+  .qbbooking-workflow-container [class*="MainContent"] {
+    height: calc(100vh - 154px); /* Subtract the height of the top and bottom bars */
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64px; /* Match the height of the AppBar exactly */
+    bottom: 90px; /* Match the height of the bottom navigation */
+    background-color: #ffffff;
+  }
+  
+  /* Left column with vertical stepper */
+  .qbbooking-workflow-container [class*="LeftColumn"] {
+    background-color: #E8F4FF !important;
+    border-right: 1px solid rgba(175, 200, 218, 0.5);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  
+  .qbbooking-workflow-container [class*="LeftColumn"]::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .qbbooking-workflow-container [class*="LeftColumn"]::-webkit-scrollbar-thumb {
+    background-color: #AFC8DA;
+    border-radius: 3px;
+  }
+  
+  .qbbooking-workflow-container [class*="LeftColumn"]::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+  
+  /* Right column with content */
+  .qbbooking-workflow-container [class*="RightColumn"] {
+    background-color: #ffffff !important;
+    overflow-y: hidden;
+    padding-left: 16px;
+    padding-right: 24px;
+  }
+  
+  .qbbooking-workflow-container [class*="RightColumn"] > div {
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  
+  .qbbooking-workflow-container [class*="RightColumn"] > div::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .qbbooking-workflow-container [class*="RightColumn"] > div::-webkit-scrollbar-thumb {
+    background-color: #AFC8DA;
+    border-radius: 3px;
+  }
+  
+  .qbbooking-workflow-container [class*="RightColumn"] > div::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+  }
+  
+  /* Stepper customization */
+  .qbbooking-workflow-container .MuiStepLabel-label {
+    font-size: 0.9rem;
+    color: #47709B !important;
+  }
+  
+  .qbbooking-workflow-container .MuiStepLabel-label.Mui-active {
+    font-weight: 700 !important;
+  }
+  
+  .qbbooking-workflow-container .MuiStepLabel-iconContainer {
+    padding-right: 12px !important;
+  }
+  
+  .qbbooking-workflow-container .MuiStepIcon-root {
+    color: #AFC8DA !important;
+    font-size: 1.5rem;
+  }
+  
+  .qbbooking-workflow-container .MuiStepIcon-root.Mui-active {
+    color: #47709B !important;
+  }
+  
+  .qbbooking-workflow-container .MuiStepIcon-root.Mui-completed {
+    color: #47709B !important;
+  }
+  
+  .qbbooking-workflow-container .MuiStepConnector-line {
+    min-height: 24px !important;
+    border-color: #AFC8DA !important;
+  }
+  
+  /* Feature section styling (bottom navigation) */
+  .qbbooking-workflow-container .feature-section {
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 100 !important;
+    height: 90px !important;
+    transition: all 0.3s ease;
+  }
+  
+  .qbbooking-workflow-container .feature-button.active {
+    transform: translateY(-5px) !important;
+    border-bottom: 3px solid #47709B !important;
+    background-color: rgba(175, 200, 218, 0.1) !important;
+  }
+  
+  /* Page title styling */
+  .qbbooking-workflow-container .page-title {
+    color: #47709B;
+    font-weight: 700;
+    border-bottom: 2px solid #47709B;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    font-size: 1.75rem;
+  }
+  
+  /* Content container */
+  .qbbooking-workflow-container .content-container {
+    background-color: white;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    height: calc(100% - 72px); /* Adjust for the page title */
+    overflow-y: auto;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 960px) {
+    .qbbooking-workflow-container [class*="MainContent"] {
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    
+    .qbbooking-workflow-container [class*="LeftColumn"] {
+      width: 100% !important;
+      height: auto;
+      min-height: auto;
+      max-height: 300px;
+      overflow-y: auto;
+      border-right: none;
+      border-bottom: 1px solid rgba(175, 200, 218, 0.3);
+    }
+    
+    .qbbooking-workflow-container [class*="RightColumn"] {
+      width: 100% !important;
+      height: calc(100% - 300px);
+      padding: 16px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .qbbooking-workflow-container [class*="LeftColumn"] {
+      max-height: 250px;
+      padding: 12px;
+    }
+    
+    .qbbooking-workflow-container [class*="RightColumn"] {
+      height: calc(100% - 250px);
+      padding: 12px;
+    }
+    
+    .qbbooking-workflow-container .content-container {
+      padding: 16px;
+    }
+  }
+  
+  /* Hide the navigation breadcrumb */
+  .qbbooking-content-wrapper :where(nav, .breadcrumb, .navigation-path, .MuiBreadcrumbs-root) {
+    display: none !important;
+  }
+  
+  /* Remove duplicated page title that appears in some child components */
+  .qbbooking-content-wrapper h1:not(.page-title),
+  .qbbooking-content-wrapper h2:not(.page-title) {
+    display: none;
+  }
+  
+  /* Style the child content to take full space */
+  .qbbooking-content-wrapper > :not(.page-title) {
+    height: calc(100% - 72px);
+    width: 100%;
+    overflow: auto;
+  }
+  
+  /* Target the button group and search bar to give proper spacing */
+  .qbbooking-content-wrapper [role="toolbar"],
+  .qbbooking-content-wrapper .MuiToolbar-root {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 16px;
+  }
+  
+  /* Ensure content is not doubly wrapped */
+  .qbbooking-content-wrapper > div:not([class]) > div:not([class]) {
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  /* Fix for any paper components that may be wrapping content */
+  .qbbooking-content-wrapper .MuiPaper-root {
+    box-shadow: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+  }
+  
+  /* Ensure all content wrappers have white background */
+  .qbbooking-content-wrapper {
+    background-color: #ffffff !important;
+  }
+  
+  .qbbooking-content-wrapper > * {
+    background-color: #ffffff !important;
+  }
+  
+  /* Override any background colors in child components */
+  .qbbooking-workflow-container [class*="RightColumn"] .MuiPaper-root,
+  .qbbooking-workflow-container [class*="RightColumn"] > div,
+  .qbbooking-workflow-container [class*="RightColumn"] > div > div {
+    background-color: #ffffff !important;
+  }

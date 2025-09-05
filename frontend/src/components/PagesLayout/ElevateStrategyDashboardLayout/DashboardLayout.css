@@ -1,0 +1,176 @@
+/* DashboardLayout.css - Styles for the Elevate Strategy Dashboard Layout */
+
+.elevate-strategy-dashboard-container {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff !important; /* Override any gradient */
+}
+
+/* Main content container */
+.elevate-strategy-dashboard-container [class*="MainContent"] {
+  height: calc(100vh - 154px); /* Subtract the height of the top and bottom bars */
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 64px; /* Match the height of the AppBar exactly */
+  bottom: 90px; /* Match the height of the bottom navigation */
+  background-color: #f5f9ff; /* Light blue background */
+}
+
+/* Content wrapper */
+.elevate-strategy-dashboard-content-wrapper {
+  background-color: #f5f9ff !important;
+  overflow-y: hidden !important;
+  padding: 24px !important;
+}
+
+/* Sidebar styling */
+.elevate-strategy-dashboard-container [class*="Sidebar"] {
+  background-color: #ffffff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.elevate-strategy-dashboard-container .sidebar-main-item {
+  position: relative;
+  padding: 18px 18px;
+  transition: all 0.2s ease;
+}
+
+/* Feature section styling (bottom navigation) */
+.elevate-strategy-dashboard-container .feature-section {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 100 !important;
+  height: 90px !important;
+  transition: all 0.3s ease;
+}
+
+.elevate-strategy-dashboard-container .feature-button.active {
+  transform: translateY(-5px) !important;
+  border-bottom: 3px solid #47709B !important;
+  background-color: rgba(175, 200, 218, 0.1) !important;
+}
+
+/* Page title styling */
+.elevate-strategy-dashboard-container .page-title {
+  color: #47709B;
+  font-weight: 700;
+  border-bottom: 2px solid #47709B;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  font-size: 1.75rem;
+}
+
+/* Content container */
+.elevate-strategy-dashboard-container .content-container {
+  background-color: white;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  height: calc(100% - 72px); /* Adjust for the page title */
+  overflow-y: auto;
+}
+
+/* Bento container styling */
+.elevate-strategy-dashboard-container .bento-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 16px;
+  height: 100%;
+  width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 960px) {
+  .elevate-strategy-dashboard-container [class*="MainContent"] {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .elevate-strategy-dashboard-content-wrapper {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 16px !important;
+  }
+  
+  .elevate-strategy-dashboard-container .bento-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(200px, auto);
+  }
+  
+  .elevate-strategy-dashboard-container .bento-item {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .elevate-strategy-dashboard-content-wrapper {
+    padding: 12px !important;
+  }
+  
+  .elevate-strategy-dashboard-container .content-container {
+    padding: 16px;
+  }
+}
+
+/* Target data grid to take full available height */
+.elevate-strategy-dashboard-content-wrapper .MuiDataGrid-root,
+.elevate-strategy-dashboard-content-wrapper [role="grid"] {
+  height: calc(100% - 100px) !important; /* Account for buttons and search */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Ensure content is not doubly wrapped */
+.elevate-strategy-dashboard-content-wrapper > div:not([class]) > div:not([class]) {
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Fix for any paper components that may be wrapping content */
+.elevate-strategy-dashboard-content-wrapper .MuiPaper-root {
+  box-shadow: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+/* DataGrid styling to match our color scheme */
+.elevate-strategy-dashboard-content-wrapper .MuiDataGrid-root .MuiDataGrid-columnHeaders {
+  background-color: #E8F4FF !important;
+}
+
+.elevate-strategy-dashboard-content-wrapper .MuiDataGrid-root .MuiDataGrid-columnHeaderTitle {
+  font-weight: bold !important;
+}
+
+.elevate-strategy-dashboard-content-wrapper .MuiDataGrid-root .MuiDataGrid-columnSeparator {
+  color: #AFC8DA !important;
+}
+
+/* Ensure selected rows use our color scheme */
+.elevate-strategy-dashboard-content-wrapper .MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
+  background-color: rgba(175, 200, 218, 0.2) !important;
+}
+
+.elevate-strategy-dashboard-content-wrapper .MuiDataGrid-root .MuiDataGrid-row.Mui-selected:hover {
+  background-color: rgba(175, 200, 218, 0.3) !important;
+} 

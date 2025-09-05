@@ -1,0 +1,213 @@
+/* EvaluatePerformanceInput.css - Styles for the Evaluate Performance Input Layout */
+
+.evaluate-performance-input-container {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff !important; /* Override any gradient */
+}
+
+/* Main content container */
+.evaluate-performance-input-container [class*="MainContent"] {
+  height: calc(100vh - 154px); /* Subtract the height of the top and bottom bars */
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 64px; /* Match the height of the AppBar exactly */
+  bottom: 90px; /* Match the height of the bottom navigation */
+  background-color: #ffffff;
+}
+
+/* Content column */
+.evaluate-performance-input-content-column {
+  background-color: #ffffff !important;
+  overflow-y: hidden !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* Content wrapper styles to match cogs-content-wrapper */
+.evaluate-performance-input-content-wrapper {
+  background-color: #ffffff !important;
+}
+
+.evaluate-performance-input-content-column > div {
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  scrollbar-width: thin;
+}
+
+.evaluate-performance-input-content-column > div::-webkit-scrollbar {
+  width: 6px;
+}
+
+.evaluate-performance-input-content-column > div::-webkit-scrollbar-thumb {
+  background-color: #AFC8DA;
+  border-radius: 3px;
+}
+
+.evaluate-performance-input-content-column > div::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+/* Feature section styling (bottom navigation) */
+.evaluate-performance-input-container .feature-section {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 100 !important;
+  height: 90px !important;
+  transition: all 0.3s ease;
+}
+
+.evaluate-performance-input-container .feature-button.active {
+  transform: translateY(-5px) !important;
+  border-bottom: 3px solid #47709B !important;
+  background-color: rgba(175, 200, 218, 0.1) !important;
+}
+
+/* Page title styling */
+.evaluate-performance-input-container .page-title {
+  color: #47709B;
+  font-weight: 700;
+  border-bottom: 2px solid #47709B;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  font-size: 1.75rem;
+}
+
+/* Content container */
+.evaluate-performance-input-container .content-container {
+  background-color: white;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  height: calc(100% - 72px); /* Adjust for the page title */
+  overflow-y: auto;
+}
+
+/* Responsive styles */
+@media (max-width: 960px) {
+  .evaluate-performance-input-container [class*="MainContent"] {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .evaluate-performance-input-content-column {
+    width: 100% !important;
+    height: 100%;
+    padding: 16px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .evaluate-performance-input-content-column {
+    padding: 12px !important;
+  }
+  
+  .evaluate-performance-input-container .content-container {
+    padding: 16px;
+  }
+}
+
+/* Hide the navigation breadcrumb */
+.evaluate-performance-input-content-column :where(nav, .breadcrumb, .navigation-path, .MuiBreadcrumbs-root) {
+  display: none !important;
+}
+
+/* Remove duplicated page title that appears in some child components */
+.evaluate-performance-input-content-column h1:not(.page-title),
+.evaluate-performance-input-content-column h2:not(.page-title) {
+  display: none;
+}
+
+/* Style the child content to take full space */
+.evaluate-performance-input-content-column > :not(.page-title) {
+  height: calc(100% - 72px);
+  width: 100%;
+  overflow: auto;
+}
+
+/* Target the button group and search bar to give proper spacing */
+.evaluate-performance-input-content-column [role="toolbar"],
+.evaluate-performance-input-content-column .MuiToolbar-root {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  margin-bottom: 16px;
+}
+
+/* Target data grid to take full available height */
+.evaluate-performance-input-content-column .MuiDataGrid-root,
+.evaluate-performance-input-content-column [role="grid"] {
+  height: calc(100% - 100px) !important; /* Account for buttons and search */
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Ensure content is not doubly wrapped */
+.evaluate-performance-input-content-column > div:not([class]) > div:not([class]) {
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Fix for any paper components that may be wrapping content */
+.evaluate-performance-input-content-column .MuiPaper-root {
+  box-shadow: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+/* Ensure all content wrappers have white background */
+.evaluate-performance-input-content-column {
+  background-color: #ffffff !important;
+}
+
+.evaluate-performance-input-content-column > * {
+  background-color: #ffffff !important;
+}
+
+/* Override any background colors in child components */
+.evaluate-performance-input-container [class*="ContentColumn"] .MuiPaper-root,
+.evaluate-performance-input-container [class*="ContentColumn"] > div,
+.evaluate-performance-input-container [class*="ContentColumn"] > div > div {
+  background-color: #ffffff !important;
+}
+
+/* DataGrid styling to match our color scheme */
+.evaluate-performance-input-content-column .MuiDataGrid-root .MuiDataGrid-columnHeaders {
+  background-color: #E8F4FF !important;
+}
+
+.evaluate-performance-input-content-column .MuiDataGrid-root .MuiDataGrid-columnHeaderTitle {
+  font-weight: bold !important;
+}
+
+.evaluate-performance-input-content-column .MuiDataGrid-root .MuiDataGrid-columnSeparator {
+  color: #AFC8DA !important;
+}
+
+/* Ensure selected rows use our color scheme */
+.evaluate-performance-input-content-column .MuiDataGrid-root .MuiDataGrid-row.Mui-selected {
+  background-color: rgba(175, 200, 218, 0.2) !important;
+}
+
+.evaluate-performance-input-content-column .MuiDataGrid-root .MuiDataGrid-row.Mui-selected:hover {
+  background-color: rgba(175, 200, 218, 0.3) !important;
+}
+

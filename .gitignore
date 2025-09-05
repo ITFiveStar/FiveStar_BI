@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+instance/
+.env
+FSBIvenv/
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# IDE/editor junk
+.vscode/
+.idea/
+.cursor/
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db

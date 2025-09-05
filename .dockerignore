@@ -1,0 +1,24 @@
+# Python cache & bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Local env & secrets
+.env
+instance/
+
+# Logs
+*.log
+
+# Editor/IDE & tooling junk
+.cursor/
+.vscode/
+.idea/
+
+# Version control
+.git/
+
+# Node/frontend artifacts (if frontend lives here too)
+node_modules/
+dist/
+build/
