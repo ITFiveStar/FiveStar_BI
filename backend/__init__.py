@@ -13,6 +13,18 @@ print("Flask app created successfully", flush=True)
 # --- Database URL resolution ---
 # In production (App Runner), we pass DATABASE_URL via Secrets Manager.
 db_url = os.getenv("DATABASE_URL")
+
+# AWS Secrets Manager returns JSON, so we need to parse it
+if db_url and db_url.startswith('{"DATABASE_URL"'):
+    import json
+    try:
+        secret_data = json.loads(db_url)
+        db_url = secret_data.get("DATABASE_URL")
+        print(f"Parsed DATABASE_URL from JSON secret", flush=True)
+    except json.JSONDecodeError as e:
+        print(f"Failed to parse DATABASE_URL JSON: {e}", flush=True)
+        db_url = None
+
 if not db_url:
     # Local dev fallback: build from DB_* envs or .env (optional)
     from dotenv import load_dotenv
