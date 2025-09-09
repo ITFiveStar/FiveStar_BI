@@ -6,8 +6,7 @@ from backend import app, db
 from flask import jsonify
 from flask_cors import CORS
 
-# CORS (relax now, tighten later to your Vercel domain)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+# CORS is already configured in __init__.py, no need to duplicate
 
 # TEMPORARY: schema bootstrap (prefer Alembic migrations in prod)
 if os.environ.get("FLASK_BOOTSTRAP_DB") == "1":
