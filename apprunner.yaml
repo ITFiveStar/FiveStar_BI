@@ -17,4 +17,4 @@ run:
       value: "*"
   secrets:
     - name: DATABASE_URL
-      value-from: fsbi/mannual-db-url
+      value-from: arn:aws:secretsmanager:us-east-2:970597967953:secret:fsbi/manual-db-url-aYe0gC
