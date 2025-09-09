@@ -1,33 +1,35 @@
 # backend/__init__.py
 from flask import Flask, jsonify
-# from flask_sqlalchemy import SQLAlchemy  # Temporarily commented for minimal test
-# from sqlalchemy import text  # Temporarily commented for minimal test
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 from flask_cors import CORS
 import os
 
 app = Flask(__name__)
 
-# --- Database setup temporarily disabled for minimal test ---
-# db_url = os.getenv("DATABASE_URL")
-# if not db_url:
-#     from dotenv import load_dotenv
-#     load_dotenv()
-#     DB_USER = os.getenv("DB_USER")
-#     DB_PASS = os.getenv("DB_PASS")
-#     DB_HOST = os.getenv("DB_HOST")
-#     DB_PORT = os.getenv("DB_PORT", "5432")
-#     DB_NAME = os.getenv("DB_NAME")
-#     if all([DB_USER, DB_PASS, DB_HOST, DB_NAME]):
-#         db_url = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
+# --- Database URL resolution ---
+# In production (App Runner), we pass DATABASE_URL via Secrets Manager.
+db_url = os.getenv("DATABASE_URL")
+if not db_url:
+    # Local dev fallback: build from DB_* envs or .env (optional)
+    from dotenv import load_dotenv
+    load_dotenv()  # no-op in prod because .env won't be in the image
+    DB_USER = os.getenv("DB_USER")
+    DB_PASS = os.getenv("DB_PASS")
+    DB_HOST = os.getenv("DB_HOST")
+    DB_PORT = os.getenv("DB_PORT", "5432")
+    DB_NAME = os.getenv("DB_NAME")
+    if all([DB_USER, DB_PASS, DB_HOST, DB_NAME]):
+        # Keep sslmode=require if your RDS enforces SSL; otherwise you can omit it.
+        db_url = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
 
-# if not db_url:
-#     raise RuntimeError("No DATABASE_URL provided and no DB_* envs found.")
+if not db_url:
+    raise RuntimeError("No DATABASE_URL provided and no DB_* envs found.")
 
-# app.config["SQLALCHEMY_DATABASE_URI"] = db_url
-# app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = db_url
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# db = SQLAlchemy(app)
-db = None  # Temporarily disabled
+db = SQLAlchemy(app)
 
 # --- CORS ---
 # Allow everything first; later set ALLOWED_ORIGINS to your Vercel domain.
@@ -50,11 +52,12 @@ def health():
 
 @app.get("/ping-db")
 def ping_db():
-    # Temporarily disabled for minimal test
-    # with db.engine.connect() as conn:
-    #     dbname, user = conn.execute(text("SELECT current_database(), current_user")).one()
-    # return jsonify(db=dbname, user=user)
-    return jsonify(message="Database temporarily disabled for testing")
+    try:
+        with db.engine.connect() as conn:
+            dbname, user = conn.execute(text("SELECT current_database(), current_user")).one()
+        return jsonify(db=dbname, user=user)
+    except Exception as e:
+        return jsonify(error=str(e), message="Database connection failed"), 500
 
 
 

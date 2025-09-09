@@ -4,13 +4,7 @@ runtime: python3
 build:
   commands:
     build:
-      - echo "Starting build process"
-      - python --version
-      - pip --version
-      - ls -la backend/
-      - cat backend/requirements.txt
       - pip install --no-cache-dir -r backend/requirements.txt
-      - echo "Build completed"
 
 run:
   runtime-version: python3

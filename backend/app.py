@@ -8,10 +8,10 @@ from flask_cors import CORS
 
 # CORS is already configured in __init__.py, no need to duplicate
 
-# TEMPORARY: schema bootstrap temporarily disabled for minimal test
-# if os.environ.get("FLASK_BOOTSTRAP_DB") == "1":
-#     with app.app_context():
-#         db.create_all()
+# TEMPORARY: schema bootstrap (prefer Alembic migrations in prod)
+if os.environ.get("FLASK_BOOTSTRAP_DB") == "1":
+    with app.app_context():
+        db.create_all()
 
 # Temporarily comment out routes for minimal test
 # from backend import crud           # noqa: E402,F401
