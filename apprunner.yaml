@@ -15,5 +15,6 @@ run:
   env:
     - name: ALLOWED_ORIGINS
       value: "*"
+  secrets:
     - name: DATABASE_URL
       value-from: fsbi/mannual-db-url
