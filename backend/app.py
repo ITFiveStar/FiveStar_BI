@@ -1,8 +1,16 @@
 # backend/app.py
 import os
+import sys
+
+print("Starting app.py initialization...", flush=True)
 
 # Your package should expose app, db in backend/__init__.py
-from backend import app, db
+try:
+    from backend import app, db
+    print("Successfully imported app and db from backend", flush=True)
+except Exception as e:
+    print(f"ERROR: Failed to import from backend: {e}", flush=True)
+    sys.exit(1)
 from flask import jsonify
 from flask_cors import CORS
 
@@ -17,6 +25,8 @@ if os.environ.get("FLASK_BOOTSTRAP_DB") == "1":
 # from backend import crud           # noqa: E402,F401
 # from backend import evaluate_performance_input_crud   # noqa: E402,F401
 # from backend import evaluate_performance_dashboard_crud  # noqa: E402,F401
+
+print("App.py initialization completed successfully!", flush=True)
 
 
 

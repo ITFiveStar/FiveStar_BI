@@ -4,8 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from flask_cors import CORS
 import os
+import sys
 
+print("Starting Flask application initialization...", flush=True)
 app = Flask(__name__)
+print("Flask app created successfully", flush=True)
 
 # --- Database URL resolution ---
 # In production (App Runner), we pass DATABASE_URL via Secrets Manager.
@@ -24,12 +27,16 @@ if not db_url:
         db_url = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}?sslmode=require"
 
 if not db_url:
-    raise RuntimeError("No DATABASE_URL provided and no DB_* envs found.")
+    print("WARNING: No DATABASE_URL provided and no DB_* envs found. Database functionality will be limited.")
+    db_url = "sqlite:///temp.db"  # Fallback to SQLite for startup
 
+print(f"Configuring database with URL: {db_url[:50]}...", flush=True)
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+print("Initializing SQLAlchemy...", flush=True)
 db = SQLAlchemy(app)
+print("SQLAlchemy initialized successfully", flush=True)
 
 # --- CORS ---
 # Allow everything first; later set ALLOWED_ORIGINS to your Vercel domain.
@@ -45,6 +52,8 @@ else:
 def home():
     return "Backend is running!"
 
+print("Flask application initialization completed successfully!", flush=True)
+
 @app.get("/health")
 def health():
     # Keep this lightweight so App Runner health checks don’t flap while DB warms up
@@ -54,8 +63,11 @@ def health():
 def ping_db():
     try:
         with db.engine.connect() as conn:
-            dbname, user = conn.execute(text("SELECT current_database(), current_user")).one()
-        return jsonify(db=dbname, user=user)
+            if "sqlite" in str(db.engine.url):
+                return jsonify(message="Using SQLite fallback database", db="sqlite")
+            else:
+                dbname, user = conn.execute(text("SELECT current_database(), current_user")).one()
+                return jsonify(db=dbname, user=user)
     except Exception as e:
         return jsonify(error=str(e), message="Database connection failed"), 500
 
