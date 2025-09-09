@@ -12,7 +12,7 @@ from backend import app, db
 from backend.models import COGS, AllOrdersPnL
 from sqlalchemy import text
 import traceback
-from scipy.optimize import root_scalar
+# from scipy.optimize import root_scalar  # Temporarily commented out for AWS App Runner build
 import json
 import math
 import plotly.graph_objects as go
