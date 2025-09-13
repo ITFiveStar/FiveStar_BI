@@ -3,6 +3,7 @@ import { Box, Paper, styled, Typography, Tabs, Tab, FormControl, InputLabel, Sel
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
+import { api } from '../../../services/api';
 import { theme } from '../../../theme';
 import { format } from 'date-fns';
 import BrandCOGSPieChart from '../../../components/Charts/COGS_by_brand_PConly_PieChart';
@@ -206,7 +207,7 @@ const COGSDetails: React.FC = () => {
     const fetchFilterOptions = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/filters_all_brand_component_sku');
+        const response = await api.get('/filters_all_brand_component_sku');
         setFilterOptions({
           brands: response.data.brands || [],
           ir_items: response.data.ir_items || [],
@@ -238,7 +239,7 @@ const COGSDetails: React.FC = () => {
         if (filters.displayMode) params.append('displayMode', filters.displayMode);
         if (filters.dateUpTo) params.append('dateUpTo', formatDateForAPI(filters.dateUpTo));
         
-        const response = await axios.get(`/cogs_details/COGS_summary_card?${params.toString()}`);
+        const response = await api.get(`/cogs_details/COGS_summary_card?${params.toString()}`);
         setCogsSummary(response.data);
         setSummaryError(null);
       } catch (err) {

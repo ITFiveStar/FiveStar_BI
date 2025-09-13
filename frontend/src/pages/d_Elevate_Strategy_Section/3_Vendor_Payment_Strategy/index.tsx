@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Paper, styled, Typography, CircularProgress, TextField, Divider, Autocomplete, MenuItem, FormControlLabel, Radio, RadioGroup, InputAdornment, FormLabel, FormControl, Select, SelectChangeEvent } from '@mui/material';
 import axios from 'axios';
+import { api } from '../../../services/api';
 import AR_AP_Statement_with_Forecast_ComboChart from '../../../components/Charts/AR_AP_StatementsClosing_with_Forecast_SummaryChart';
 import Cash_VendorAPClosing_Chart from '../../../components/Charts/Cash_VendorAPClosing_with_Forecast_SummaryChart';
 import POGanttChart from '../../../components/Charts/POGanttChart';
@@ -195,7 +196,7 @@ const VendorPaymentStrategy: React.FC = () => {
     const fetchFilterOptions = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/filters_all_brand_component_sku');
+        const response = await api.get('/filters_all_brand_component_sku');
         setFilterOptions({
           brands: response.data.brands || [],
           ir_items: response.data.ir_items || [],

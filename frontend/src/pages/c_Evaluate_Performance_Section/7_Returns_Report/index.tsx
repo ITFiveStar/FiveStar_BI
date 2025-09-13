@@ -3,6 +3,7 @@ import { Box, Paper, styled, Typography, CircularProgress, TextField, MenuItem, 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
+import { api } from '../../../services/api';
 import DownloadIcon from '@mui/icons-material/Download';
 import CodeIcon from '@mui/icons-material/Code';
 import TableChartIcon from '@mui/icons-material/TableChart';
@@ -320,7 +321,7 @@ const ReturnsReport: React.FC = () => {
     const fetchFilterOptions = async () => {
       try {
         setLoadingOptions(true);
-        const response = await axios.get('/filters_all_brand_component_sku');
+        const response = await api.get('/filters_all_brand_component_sku');
         if (response.data) {
           setSkuOptions(response.data.skus || []);
         }

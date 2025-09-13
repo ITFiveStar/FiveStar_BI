@@ -9,6 +9,7 @@ import MainComponentSalesPieChart from '../../../components/Charts/Main_Componen
 import MainComponentProfitabilityBarChart, { ChartDisplayMode } from '../../../components/Charts/Main_Component_SKU_Profitability_BarChart';
 import AR_AP_StatementsClosing_SummaryChart from '../../../components/Charts/AR_AP_StatementsClosing_SummaryChart';
 import axios from 'axios';
+import { api } from '../../../services/api';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { format } from 'date-fns';
@@ -300,7 +301,7 @@ const FinancialOverview: React.FC = () => {
     const fetchFilterOptions = async () => {
       try {
         setLoadingOptions(true);
-        const response = await axios.get('/filters_all_brand_component_sku');
+        const response = await api.get('/filters_all_brand_component_sku');
         if (response.data) {
           setBrandOptions(response.data.brands || []);
           setIrOptions(response.data.ir_items || []);
@@ -366,7 +367,7 @@ const FinancialOverview: React.FC = () => {
           url += `?${queryString}`;
         }
         
-        const response = await axios.get(url);
+        const response = await api.get(url);
         setLatestARAPValues(response.data.latest_values);
       } catch (error: any) {
         console.error('Error loading AR/AP data:', error);
@@ -649,7 +650,7 @@ const FinancialOverview: React.FC = () => {
           url += `?${queryString}`;
         }
         
-        const response = await axios.get(url);
+        const response = await api.get(url);
         setVendorAPData(response.data);
       } catch (error: any) {
         console.error('Error loading vendor AP data:', error);

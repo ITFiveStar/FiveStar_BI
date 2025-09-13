@@ -3,6 +3,7 @@ import { Box, Paper, styled, Typography, CircularProgress, RadioGroup, FormContr
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
+import { api } from '../../../services/api';
 import OperatingExpenseBreakdownByBrand from '../../../components/Charts/OperatingExpense_by_Brand_breakdownChart';
 import OperatingExpenseDetailedItems from '../../../components/Charts/OperatingExpense_DetailedItem_trendChart';
 
@@ -273,7 +274,7 @@ const OperatingExpenseDetails: React.FC = () => {
     const fetchFilterOptions = async () => {
       try {
         setLoadingOptions(true);
-        const response = await axios.get('/filters_all_brand_component_sku');
+        const response = await api.get('/filters_all_brand_component_sku');
         if (response.data) {
           setBrandOptions(response.data.brands || []);
           setIrOptions(response.data.ir_items || []);

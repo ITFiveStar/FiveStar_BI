@@ -3,6 +3,7 @@ import { Box, Paper, styled, Typography, CircularProgress, TextField, Divider, A
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
+import { api } from '../../../services/api';
 import RevenueForecastLineChart from '../../../components/Charts/Revenue_Forecast_LineChart';
 import RevenueForecastTable from '../../../components/Tables/RevenueForecastTable';
 
@@ -223,7 +224,7 @@ const RevenueStrategy: React.FC = () => {
     const fetchFilterOptions = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/filters_all_brand_component_sku');
+        const response = await api.get('/filters_all_brand_component_sku');
         setFilterOptions({
           brands: response.data.brands || [],
           ir_items: response.data.ir_items || [],
@@ -315,7 +316,7 @@ const RevenueStrategy: React.FC = () => {
         params.append('scenario', '1');
         
         // Fetch data
-        const response = await axios.get(`/evaluate_strategy/revenue_oriented_forecast_line_table_data?${params.toString()}`);
+        const response = await api.get(`/evaluate_strategy/revenue_oriented_forecast_line_table_data?${params.toString()}`);
         
         // Process response data
         console.log('Scenario 1 data:', response.data);
@@ -365,7 +366,7 @@ const RevenueStrategy: React.FC = () => {
         params.append('scenario', '2');
         
         // Fetch data
-        const response = await axios.get(`/evaluate_strategy/revenue_oriented_forecast_line_table_data?${params.toString()}`);
+        const response = await api.get(`/evaluate_strategy/revenue_oriented_forecast_line_table_data?${params.toString()}`);
         
         // Process response data
         console.log('Scenario 2 data:', response.data);
