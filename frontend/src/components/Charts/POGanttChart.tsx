@@ -48,8 +48,9 @@ const POGanttChart: React.FC<POGanttChartProps> = ({ brand, ir, poStartDate, poE
       params.append('target_consumption_dsi', targetDSI);
       params.append('direct_html', 'true');
 
-      // Use direct URL approach
-      const directUrl = `http://localhost:5000/evaluate_strategy/po_gantt_chart?${params.toString()}`;
+      // Use direct URL approach with environment variable
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:5000';
+      const directUrl = `${API_BASE_URL}/evaluate_strategy/po_gantt_chart?${params.toString()}`;
 
       // Update the iframe
       if (chartContainerRef.current) {
