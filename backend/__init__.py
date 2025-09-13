@@ -54,10 +54,10 @@ print("SQLAlchemy initialized successfully", flush=True)
 # Allow everything first; later set ALLOWED_ORIGINS to your Vercel domain.
 allowed = os.getenv("ALLOWED_ORIGINS", "*")
 if allowed == "*":
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"/*": {"origins": "*"}})
 else:
     origins = [o.strip() for o in allowed.split(",") if o.strip()]
-    CORS(app, resources={r"/api/*": {"origins": origins}})
+    CORS(app, resources={r"/*": {"origins": origins}})
 
 # --- Routes ---
 @app.route("/")
