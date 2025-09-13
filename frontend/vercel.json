@@ -1,0 +1,6 @@
+{
+    "rewrites": [
+      { "source": "/(.*)", "destination": "https://64utraqm4j.us-east-2.awsapprunner.com/$1" }
+    ]
+  }
+  
